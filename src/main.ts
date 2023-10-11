@@ -13,7 +13,7 @@ app.append(header);
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>
     <div class="card">
-        <button name="button">Press me</button>
+        <button name="button">☕</button>
     </div>
   </div>
 `;
