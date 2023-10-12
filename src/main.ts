@@ -13,9 +13,19 @@ app.append(header);
 let coffees: number = 0;
 let autoNum: number = 0;
 let pastTime: number = 0;
-const purchaseCosts: number[] = [10, 100, 1000];
-const purchaseIncrease: number[] = [0.1, 2.0, 50];
-const purchaseAmounts: number[] = [1, 1, 1];
+
+interface Item {
+  name: string;
+  cost: number;
+  rate: number;
+  amount: number;
+}
+
+const availableItems: Item[] = [
+  { name: "Coffee Grinder ", cost: 10, rate: 0.1, amount: 1 },
+  { name: "Coffee Kettle ", cost: 100, rate: 2.0, amount: 1 },
+  { name: "Espresso Machine ", cost: 1000, rate: 50, amount: 1 },
+];
 
 function autoCoffee(numPick: number) {
   shopEnabling();
@@ -28,29 +38,29 @@ function autoCoffee(numPick: number) {
 }
 
 function purchase(purchaseObj: number) {
-  coffees -= purchaseCosts[purchaseObj];
-  purchaseCosts[purchaseObj] *= 1.15;
-  autoNum += purchaseIncrease[purchaseObj];
-  purchaseAmounts[purchaseObj] += 1;
+  coffees -= availableItems[purchaseObj].cost;
+  availableItems[purchaseObj].cost *= 1.15;
+  autoNum += availableItems[purchaseObj].rate;
+  availableItems[purchaseObj].amount += 1;
   document.getElementById("autoClick")!.textContent =
     autoNum.toFixed(2) + " coffees per second";
   document.getElementById("purchaseZero")!.textContent =
-    "Coffee Grinder " +
-    purchaseAmounts[0] +
+    availableItems[0].name +
+    availableItems[0].amount +
     ": costs " +
-    purchaseCosts[0].toFixed(2) +
+    availableItems[0].cost.toFixed(2) +
     " coffees";
   document.getElementById("purchaseOne")!.textContent =
-    "Coffee Kettle " +
-    purchaseAmounts[1] +
+    availableItems[1].name +
+    availableItems[1].amount +
     ": costs " +
-    purchaseCosts[1].toFixed(2) +
+    availableItems[1].cost.toFixed(2) +
     " coffees";
   document.getElementById("purchaseTwo")!.textContent =
-    "Espresso Machine " +
-    purchaseAmounts[2] +
+    availableItems[2].name +
+    availableItems[2].amount +
     ": costs " +
-    purchaseCosts[2].toFixed(2) +
+    availableItems[2].cost.toFixed(2) +
     " coffees";
 }
 
@@ -60,11 +70,11 @@ requestAnimationFrame(function () {
 
 function shopEnabling() {
   (document.getElementById("purchaseZero") as HTMLButtonElement)!.disabled =
-    coffees < purchaseCosts[0];
+    coffees < availableItems[0].cost;
   (document.getElementById("purchaseOne") as HTMLButtonElement)!.disabled =
-    coffees < purchaseCosts[1];
+    coffees < availableItems[1].cost;
   (document.getElementById("purchaseTwo") as HTMLButtonElement)!.disabled =
-    coffees < purchaseCosts[2];
+    coffees < availableItems[2].cost;
 }
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
@@ -77,15 +87,17 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
       <div id="autoClick">${autoNum.toFixed(2)} coffees per second</div>
     </div>
     <div class="card">
-      <button id="purchaseZero" button name="button">Coffee Grinder 1: costs ${purchaseCosts[0].toFixed(
+      <button id="purchaseZero" button name="button">${
+        availableItems[0].name
+      } ${availableItems[0].amount}: costs ${availableItems[0].cost.toFixed(
         2,
       )} coffees</button>
-      <button id="purchaseOne" button name="button">Coffee Kettle 1: costs ${purchaseCosts[1].toFixed(
-        2,
-      )} coffees</button>
-      <button id="purchaseTwo" button name="button">Espresso Machine 1: costs ${purchaseCosts[2].toFixed(
-        2,
-      )} coffees</button>
+      <button id="purchaseOne" button name="button">${availableItems[1].name} ${
+        availableItems[1].amount
+      }: costs ${availableItems[1].cost.toFixed(2)} coffees</button>
+      <button id="purchaseTwo" button name="button">${availableItems[2].name} ${
+        availableItems[2].amount
+      }: costs ${availableItems[2].cost.toFixed(2)} coffees</button>
     </div>
   </div>
 `;
