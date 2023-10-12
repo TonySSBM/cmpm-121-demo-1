@@ -70,7 +70,7 @@ function shopEnabling() {
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>
     <div class="card">
-      <button id="counter" button name="button">☕</button>
+      <button id="counter" button name="button"><img src = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Emoji_u2615.svg/2048px-Emoji_u2615.svg.png" width="200" height="200"/></button>
     </div>
     <div id="panel">
       <div id="field_name">${coffees.toFixed(2)} coffees made</div>
