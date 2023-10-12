@@ -25,6 +25,8 @@ const availableItems: Item[] = [
   { name: "Coffee Grinder ", cost: 10, rate: 0.1, amount: 1 },
   { name: "Coffee Kettle ", cost: 100, rate: 2.0, amount: 1 },
   { name: "Espresso Machine ", cost: 1000, rate: 50, amount: 1 },
+  { name: "Underpaid Barista ", cost: 5000, rate: 750, amount: 1 },
+  { name: "Coffee Store ", cost: 10000, rate: 2000, amount: 1 },
 ];
 
 function autoCoffee(numPick: number) {
@@ -62,6 +64,18 @@ function purchase(purchaseObj: number) {
     ": costs " +
     availableItems[2].cost.toFixed(2) +
     " coffees";
+  document.getElementById("purchaseThree")!.textContent =
+    availableItems[3].name +
+    availableItems[3].amount +
+    ": costs " +
+    availableItems[3].cost.toFixed(2) +
+    " coffees";
+  document.getElementById("purchaseFour")!.textContent =
+    availableItems[4].name +
+    availableItems[4].amount +
+    ": costs " +
+    availableItems[4].cost.toFixed(2) +
+    " coffees";
 }
 
 requestAnimationFrame(function () {
@@ -75,6 +89,10 @@ function shopEnabling() {
     coffees < availableItems[1].cost;
   (document.getElementById("purchaseTwo") as HTMLButtonElement)!.disabled =
     coffees < availableItems[2].cost;
+  (document.getElementById("purchaseThree") as HTMLButtonElement)!.disabled =
+    coffees < availableItems[3].cost;
+  (document.getElementById("purchaseFour") as HTMLButtonElement)!.disabled =
+    coffees < availableItems[4].cost;
 }
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
@@ -98,6 +116,16 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
       <button id="purchaseTwo" button name="button">${availableItems[2].name} ${
         availableItems[2].amount
       }: costs ${availableItems[2].cost.toFixed(2)} coffees</button>
+      <button id="purchaseThree" button name="button">${
+        availableItems[3].name
+      } ${availableItems[3].amount}: costs ${availableItems[3].cost.toFixed(
+        2,
+      )} coffees</button>
+      <button id="purchaseFour" button name="button">${
+        availableItems[4].name
+      } ${availableItems[4].amount}: costs ${availableItems[4].cost.toFixed(
+        2,
+      )} coffees</button>
     </div>
   </div>
 `;
@@ -127,3 +155,11 @@ document
 document
   .getElementById("purchaseTwo")!
   .addEventListener("click", () => purchase(2));
+
+document
+  .getElementById("purchaseThree")!
+  .addEventListener("click", () => purchase(3));
+
+document
+  .getElementById("purchaseFour")!
+  .addEventListener("click", () => purchase(4));
