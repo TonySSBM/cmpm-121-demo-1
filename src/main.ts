@@ -29,6 +29,7 @@ function autoCoffee(numPick: number) {
 
 function purchase(purchaseObj: number) {
   coffees -= purchaseCosts[purchaseObj];
+  purchaseCosts[purchaseObj] *= 1.15;
   autoNum += purchaseIncrease[purchaseObj];
   purchaseAmounts[purchaseObj] += 1;
   document.getElementById("autoClick")!.textContent =
@@ -37,19 +38,19 @@ function purchase(purchaseObj: number) {
     "Coffee Grinder " +
     purchaseAmounts[0] +
     ": costs " +
-    purchaseCosts[0] +
+    purchaseCosts[0].toFixed(2) +
     " coffees";
   document.getElementById("purchaseOne")!.textContent =
     "Coffee Kettle " +
     purchaseAmounts[1] +
     ": costs " +
-    purchaseCosts[1] +
+    purchaseCosts[1].toFixed(2) +
     " coffees";
   document.getElementById("purchaseTwo")!.textContent =
     "Espresso Machine " +
     purchaseAmounts[2] +
     ": costs " +
-    purchaseCosts[2] +
+    purchaseCosts[2].toFixed(2) +
     " coffees";
 }
 
@@ -76,15 +77,15 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
       <div id="autoClick">${autoNum.toFixed(2)} coffees per second</div>
     </div>
     <div class="card">
-      <button id="purchaseZero" button name="button">Coffee Grinder 1: costs ${
-        purchaseCosts[0]
-      } coffees</button>
-      <button id="purchaseOne" button name="button">Coffee Kettle 1: costs ${
-        purchaseCosts[1]
-      } coffees</button>
-      <button id="purchaseTwo" button name="button">Espresso Machine 1: costs ${
-        purchaseCosts[2]
-      } coffees</button>
+      <button id="purchaseZero" button name="button">Coffee Grinder 1: costs ${purchaseCosts[0].toFixed(
+        2,
+      )} coffees</button>
+      <button id="purchaseOne" button name="button">Coffee Kettle 1: costs ${purchaseCosts[1].toFixed(
+        2,
+      )} coffees</button>
+      <button id="purchaseTwo" button name="button">Espresso Machine 1: costs ${purchaseCosts[2].toFixed(
+        2,
+      )} coffees</button>
     </div>
   </div>
 `;
